@@ -85,6 +85,8 @@ contract auction
 	    require(status == 1);
 	    require(msg.value > current_bid);
 	    
+	    bidder.transfer(current_bid);
+	    
 	    current_bid = msg.value;
 	    bidder = msg.sender;
 	    
