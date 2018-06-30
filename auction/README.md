@@ -138,22 +138,86 @@ Function used to complete the auction
 
 ```
 function confirm_bid() public
-
 ```
 
+**Notes:**
+
+This function can only be called by the current highest bidder after either he reached the maximum bid or the seller has accept his bid using the accept_bid function.
+This function will release the ether on the bid to the seller and the mediator fee if there was a mediation invoked during the dapp execution.
+Real life application: this function should be called after the bidder received the product or service and to confirm that the payment can be transfered to the seller. If the bidder call this action before beeing sure that he received what he expected there will be no way to reverse the ethereum paid.
+
+## Withdraw
+
+Function used to retrieve all ether left on the Dapp
+
+```
+function withdraw() public
+```
+
+**Notes:**
+
+Only the buyer can use this function. 
+The contract also must be with the status as concluded (status = 3).
+
+## Invoke Mediation
+
+Function used to start a mediation
+
+```
+function invoke_mediation() public
+```
+
+**Notes:**
+
+Mediation can be invoked only by the seller or the highest bidder and when the contract is active (status = 1).
+By enabling mediation all functions associated with mediation will become available to the mediator.
+Also after calling this function for the first time the mediator will receive the mediator_fee on the conclusion of the contract.
+
+## Mediation: end auction
+
+This function can be called by the mediator to end the auction
+
+```
+function mediation_end_auction(uint _seller_fee, uint _bidder_fee) public
+```
+
+**Parameters:**
+
+* _seller_fee : *amount in ether to be sent to the seller*
+* _bidder_fee : *amount in ether to be sent to the bidder*
+
+**Notes:**
+
+Only the mediator may call this function when the contract is under mediation (status = 2).
+The amount of ether informed as the seller_fee and the _bidder_fee must be equal to the current_bid.
+The auction status will then change to complete (status = 3), enabling the buyer to withdraw any ehter left using the withdraw function.
+
+## Mediation: remove bidder
+
+Function to remove the current highest bidder.
+
+```
+function mediation_remove_bidder() public
+```
+
+**Notes:**
+
+Only the mediator may call this function when the contract is under mediation (status = 2).
+This function is usefull when the bidder is misbehaving or the seller does not want that especific bidder in the auction.
 
 
+## Mediation: end mediation
 
+Function to end the mediation process
 
+```
+function mediation_end() public
+```
 
+**Notes:**
 
-
-
-
-
-
-
-
+Only the mediator may call this function when the contract is under mediation (status = 2).
+this function returns the contract to active (status = 1)
 
 
 
