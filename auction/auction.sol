@@ -3,16 +3,16 @@ pragma solidity ^0.4.8;
 contract auction
 {
    
-    address seller;
-    address bidder;
-    address mediator;
+    	address seller;
+    	address bidder;
+   	address mediator;
     
 	address future_mediator;
     
 	uint mediator_fee;
-    uint future_fee;
-    uint mediation_invoked;
-    uint mediator_aproved;
+    	uint future_fee;
+    	uint mediation_invoked;
+    	uint mediator_aproved;
 
 	
 	uint current_bid;
