@@ -30,6 +30,9 @@ contract auction
 	    mediator = _mediator;
 	    mediator_fee = _mediator_fee;
 	    max_bid = _max_bid;
+	    
+	    bidder = 0x0;
+	    current_bid = 0;
 	
     	}
 	
@@ -100,6 +103,12 @@ contract auction
 	        
 	    }
 	    
+	}
+	
+	function get_highest_bid() public returns(uint){
+	
+		return current_bid;
+		
 	}
 	
 	function accept_bid() public{
